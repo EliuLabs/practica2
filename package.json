@@ -1,5 +1,5 @@
 {
-  "name": "CICDTEST",
+  "name": "cicdtest",
   "version": "1.0.0",
   "description": "A simple CAP project.",
   "repository": "<Add your repository here>",
@@ -7,22 +7,53 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^7",
-    "express": "^4",
+    "@sap/cds-hana": "^2",
     "@sap/xssec": "^3",
-    "passport": "^0",
-    "@sap/cds-hana": "^2"
+    "express": "^4",
+    "passport": "^0"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
-    "@sap/cds-dk": "^7"
+    "@sap/cds-dk": "^7",
+    "@sap/hdi-deploy": "4.9.2",
+    "@sap/ux-specification": "^1.120.2",
+    "rimraf": "^3.0.2"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "watch-mis.pensiones": "cds watch --open mis.pensiones/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy MisPensiones --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
   },
   "cds": {
+    "build": {
+      "tasks": [
+        {
+          "for": "hana",
+          "dest": "../db"
+        },
+        {
+          "for": "node-cf"
+        }
+      ]
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    },
     "requires": {
-      "auth": "xsuaa",
-      "db": "hana"
+      "db": {
+        "kind": "hana"
+      },
+      "uaa": {
+        "kind": "xsuaa"
+      },
+      "[production]": {
+        "db": "hana"
+      }
+    },
+    "fiori": {
+      "lean_draft": true
     }
   }
 }
