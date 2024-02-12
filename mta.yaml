@@ -8,7 +8,7 @@ modules:
     path: gen/srv
     requires:
       - name: CICDTEST-auth
-      - name: CICDTEST-db
+      - name: CICDTEST4R-db
       - name: CICDTEST-logging
     provides:
       - name: srv-api
@@ -22,7 +22,7 @@ modules:
     type: hdb
     path: db
     requires:
-      - name: CICDTEST-db
+      - name: CICDTEST4R-db
         properties:
           TARGET_CONTAINER: ~{hdi-container-name}
     parameters:
@@ -53,7 +53,7 @@ resources:
       path: ./xs-security.json
       service: xsuaa
       service-plan: application
-  - name: CICDTEST-db
+  - name: CICDTEST4R-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
