@@ -65,8 +65,6 @@ resources:
     parameters:
       service: application-logs
       service-plan: standard
-  - name: cross-container-service-1
-    type: deleteme
 parameters:
   enable-parallel-deployments: true
 build-parameters:
