@@ -16,8 +16,12 @@ modules:
           srv-url: ${default-url}
     parameters:
       buildpack: nodejs_buildpack
+      host: ${appname}
     build-parameters:
       builder: npm
+      ignore:
+      - .env
+      - ./node_modules      
   - name: CICDTEST-db-deployer
     type: hdb
     path: db
@@ -27,6 +31,9 @@ modules:
           TARGET_CONTAINER: ~{hdi-container-name}
     parameters:
       buildpack: nodejs_buildpack
+      ignore:
+      - .env
+      - ./node_modules      
   - name: CICDTEST
     type: approuter.nodejs
     path: app/
@@ -47,12 +54,10 @@ resources:
   - name: CICDTEST-auth
     type: org.cloudfoundry.managed-service
     parameters:
-      config:
-        tenant-mode: dedicated
-        xsappname: CICDTEST-${org}-${space}
       path: ./xs-security.json
       service: xsuaa
       service-plan: application
+      service-name: CICDTEST-xsuaa-service
   - name: CICDTEST4R-db
     type: com.sap.xs.hdi-container
     parameters:
@@ -63,12 +68,14 @@ resources:
   - name: CICDTEST-logging
     type: org.cloudfoundry.managed-service
     parameters:
+      service-name: CICDTEST-logging-service
       service: application-logs
-      service-plan: standard
+      service-plan: lite
 parameters:
+  appname: CICDTEST-fcf59e0ea4e1
   enable-parallel-deployments: true
 build-parameters:
   before-all:
-    - builder: custom
-      commands:
-        - npx cds build --production
+  - builder: custom
+    commands:
+    - npx cds build --production

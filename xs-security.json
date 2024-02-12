@@ -1,4 +1,6 @@
 {
+  "xsappname"     : "CICDTEST-fcf59e0ea4e1", 
+  "tenant-mode"   : "shared", 
   "scopes": [
     {
       "name": "$XSAPPNAME.admin",
