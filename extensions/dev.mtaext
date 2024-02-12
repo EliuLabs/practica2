@@ -1,0 +1,18 @@
+ID: CICDTEST-dev
+_schema-version: "3.1"
+extends: CICDTEST-solution
+
+parameters:
+# Avoid special characters or mixed casing in the name. 
+#Alternately, the TENANT_HOST_PATTERN parameter needs to be adapted
+# to accommodate special characters
+  appname: cicdtest
+  provider-admin-email: administrator@example.com
+  saas-description: "ABAP based SaaS solution with an ABAP tenant per subscription"
+  saas-display-name: "cicdtest"
+  tenant-mode: multi
+
+modules:
+  - name: CICDTEST
+    properties:
+      XS_APP_LOG_LEVEL: debug
