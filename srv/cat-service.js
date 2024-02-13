@@ -3,7 +3,7 @@ const { Books } = cds.entities ('sap.capire.bookshop')
 
 class CatalogService extends cds.ApplicationService { init(){
 
-  // Reduce stock of ordered books if available stock suffices
+  // Reduce stock of ordered books if available stock suffices test
   this.on ('submitOrder', async req => {
     const {book,quantity} = req.data
     let {stock} = await SELECT `stock` .from (Books,book)
