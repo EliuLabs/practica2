@@ -34,6 +34,8 @@ annotate AdminService.Books with @(UI: {
     {Value: author_ID},
     {Value: genre_ID},
     {Value: descr},
+    {Value: image}
+    
   ]},
   FieldGroup #Details: {Data: [
     {Value: stock},
