@@ -1,0 +1,9 @@
+kind: Component
+spec:
+  team:
+    productOwner: I871379
+    technicalOwner: I871379
+    productManager: I871379
+    qualityLead: I871379
+    uxLead: I871379
+    securityLead: I871379
