@@ -8,5 +8,5 @@ module.exports = class AdminService extends cds.ApplicationService { init(){
 /** Generate primary keys for target entity in request */
 async function genid (req) {
   const {ID} = await cds.tx(req).run (SELECT.one.from(req.target.actives).columns('max(ID) as ID'))
-  req.data.ID = ID - ID % 100 + 100 + 2
+  req.data.ID = ID - ID % 100 + 100 + 5
 }
