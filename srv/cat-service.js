@@ -8,7 +8,7 @@ class CatalogService extends cds.ApplicationService {
     this.on('submitOrder', async req => {
       const { book, quantity } = req.data
       let { stock } = await SELECT`stock`.from(Books, book)
-      if (stock >= quantity) {
+      if (stock >= quantity || stock >= quantity) {
         await UPDATE(Books, book).with(`stock -=`, quantity)
         await this.emit('OrderedBook', { book, quantity, buyer: req.user.id })
         return { stock }
